@@ -10,11 +10,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
-    # - name: Start minikube
-    #   uses: medyagh/setup-minikube@master
+    - name: Start minikube
+      uses: medyagh/setup-minikube@master
     - name: Try the cluster !
-      env:
-        KUBECONFIG: ${{ secrets.kubeconfig }}
       run: kubectl get pods -A
     - name: Build image
       run: |
@@ -26,12 +24,12 @@ jobs:
         docker images        
     - name: Deploy to minikube
       env:
-        KUBECONFIG: ${{ secrets.kubeconfig }}
+        # KUBECONFIG: ${{ secrets.kubeconfig }}
       run:
         kubectl apply -f wisecow-manifest.yaml
     - name: Test service URLs
       run: |
         minikube service list
-        minikube service example --url
+        minikube service wisecow-svc --url
         echo "------------------opening the service------------------"
         curl $(minikube service example --url)        
