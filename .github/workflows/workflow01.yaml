@@ -23,6 +23,8 @@ jobs:
     - name: Deploy to minikube
       run:
         kubectl apply -f wisecow-manifest.yaml
+    - name: Check wisecow pod is running
+      run: kubectl get pods -A
     - name: Test service URLs
       run: |
         minikube service list
