@@ -23,7 +23,7 @@ jobs:
         echo -n "verifying images:"
         docker images        
     - name: Deploy to minikube
-      env:
+      # env:
         # KUBECONFIG: ${{ secrets.kubeconfig }}
       run:
         kubectl apply -f wisecow-manifest.yaml
