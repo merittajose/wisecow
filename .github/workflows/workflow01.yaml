@@ -13,6 +13,8 @@ jobs:
     # - name: Start minikube
     #   uses: medyagh/setup-minikube@master
     - name: Try the cluster !
+      env:
+        KUBECONFIG: ${{ secrets.kubeconfig }}
       run: kubectl get pods -A
     - name: Build image
       run: |
